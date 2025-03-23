@@ -1,6 +1,7 @@
 import './createPage.css'
 import Image from '../../components/image/image'
 const CreatePage = () => {
+    
     return (
         <div className='createPage'>
             <div className='createTop'>
