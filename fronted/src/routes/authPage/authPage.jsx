@@ -3,7 +3,7 @@ import Image from "../../components/image/image";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import apiRequest from "../../utils/apiRequest";
-// import useAuthStore from "../../utils/authStore";
+import useAuthStore from "../../utils/authStore";
 
 const AuthPage = () => {
     const [isRegister, setIsRegister] = useState(false);
@@ -11,7 +11,7 @@ const AuthPage = () => {
 
     const navigate = useNavigate();
 
-    // const { setCurrentUser } = useAuthStore();
+    const { setCurrentUser } = useAuthStore();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const AuthPage = () => {
             `/users/auth/${isRegister ? "register" : "login"}`,
             data
         );
-        // setCurrentUser(res.data);
+        setCurrentUser(res.data);
 
         navigate("/");
         } catch (err) {
