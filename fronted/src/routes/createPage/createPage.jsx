@@ -44,18 +44,18 @@ const CreatePage = () => {
         if (isEditing) {
             setIsEditing(false);
         } else {
-            const fromData = new FormData(formRef.current);
-            fromData.append("media", file);
-            FormData.append("testOptions", textOptions);
-            FormData.append("canvasOptions", canvasOptions);
+            const formData = new FormData(formRef.current);
+            formData.append("media", file);
+            formData.append("textOptions", JSON.stringify(textOptions));
+            formData.append("canvasOptions", JSON.stringify(canvasOptions));
 
             try {
-                const res = await apiRequest.post("/pins", fromData,{
+                const res = await apiRequest.post("/pins", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }
                 });
-                console.log(res)
+                navigate(`/pin/${res.data._id}`);
             } catch (error) {
                 console.log(error)
             }
@@ -131,7 +131,7 @@ const CreatePage = () => {
                         <div className="createFormItem">
                             <label htmlFor="board">Board</label>
                             <select name="board" id="board">
-                                <option>Choose a board</option>
+                                <option value="">Choose a board</option>
                                 <option value="1">Board 1</option>
                                 <option value="2">Board 2</option>
                                 <option value="3">Board 3</option>
