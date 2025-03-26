@@ -8,9 +8,6 @@ export const getPins = async (req, res) => {
     const boardId = req.query.boardId
     const LIMIT = 22;
 
-
-
-
     const pins = await Pin.find(search ? {
         $or: [
             {title: {$regex: search, $options: 'i'}},
@@ -33,3 +30,5 @@ export const getPin = async (req, res) => {
 
     res.json(pin);
 }
+
+export const createPin = async (req, res) => {}
